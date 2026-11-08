@@ -17,6 +17,7 @@ page = st.sidebar.radio(
         "Subject Library",
         "Concept Connections",    
         "Knowledge Check",
+        "Personalised Learning",
         "Prerequisite Finder",
         "Visual Learning Roadmap",
         "Learning Progress"
@@ -398,6 +399,127 @@ if page == "Concept Connections":
     else:
         st.info("Explore more concepts to discover additional connections.")
 
+elif page == "Personalised Learning":
+    st.title("🎯 Personalised Learning")
+    st.write("Get a learning path based on your interests and current knowledge.")
+
+    st.subheader("Tell us about your learning goals")
+
+    subject = st.selectbox(
+        "Choose your subject:",
+        [
+            "Mathematics",
+            "Computer Science",
+            "Physics",
+            "Chemistry",
+            "Artificial Intelligence",
+            "Biology"
+        ]
+    )
+
+    level = st.selectbox(
+        "Choose your current level:",
+        ["Beginner", "Intermediate", "Advanced"]
+    )
+
+    goal = st.selectbox(
+        "What do you want to achieve?",
+        [
+            "Build Strong Fundamentals",
+            "Improve Problem Solving",
+            "Learn Advanced Concepts"
+        ]
+    )
+    if "show_personalised_path" not in st.session_state:
+        st.session_state.show_personalised_path = False
+    if st.button("Generate My Learning Path"):
+        st.session_state.show_personalised_path = True
+        st.session_state.saved_subject = subject
+        st.session_state.saved_level = level
+        st.session_state.saved_goal = goal
+
+            
+        learning_recommendations = {
+            "Mathematics": {
+                "Beginner": ["Number Systems", "Algebra Basics", "Geometry"],
+                "Intermediate": ["Trigonometry", "Calculus", "Statistics"],
+                "Advanced": ["Linear Algebra", "Differential Equations", "Advanced Calculus"]
+            },
+            "Computer Science": {
+                "Beginner": ["Computer Fundamentals", "Python Basics", "Problem Solving"],
+                "Intermediate": ["Data Structures", "Algorithms", "Object-Oriented Programming"],
+                "Advanced": ["Advanced Algorithms", "Operating Systems", "Database Systems"]
+            },
+            "Physics": {
+                "Beginner": ["Units and Measurements", "Motion", "Force and Laws of Motion"],
+                "Intermediate": ["Work and Energy", "Waves", "Electricity and Magnetism"],
+                "Advanced": ["Electromagnetic Theory", "Modern Physics", "Quantum Mechanics"]
+            },
+            "Chemistry": {
+                "Beginner": ["Atomic Structure", "Elements and Compounds", "Chemical Bonding"],
+                "Intermediate": ["Chemical Reactions", "Thermodynamics", "Organic Chemistry"],
+                "Advanced": ["Chemical Kinetics", "Electrochemistry", "Advanced Organic Chemistry"]
+            },
+            "Artificial Intelligence": {
+                "Beginner": ["Python Basics", "Mathematics for AI", "Introduction to AI"],
+                "Intermediate": ["Machine Learning", "Data Processing", "Neural Networks"],
+                "Advanced": ["Deep Learning", "Natural Language Processing", "Computer Vision"]
+            },
+            "Biology": {
+                "Beginner": ["Cell Biology", "Human Body Systems", "Basic Genetics"],
+                "Intermediate": ["Molecular Biology", "Ecology", "Evolution"],
+                "Advanced": ["Genetic Engineering", "Biotechnology", "Advanced Genetics"]
+            }
+        }
+
+        recommended_topics = learning_recommendations[subject][level]
+        st.session_state.saved_topics = recommended_topics
+
+    if st.session_state.show_personalised_path:
+        saved_subject = st.session_state.saved_subject
+        saved_level = st.session_state.saved_level
+        saved_goal = st.session_state.saved_goal
+        recommended_topics = st.session_state.saved_topics
+
+        st.subheader("📚 Your Recommended Learning Path")
+
+        st.write(f"**Subject:** {saved_subject}")
+        st.write(f"**Current Level:** {saved_level}")
+        st.write(f"**Learning Goal:** {saved_goal}")
+
+        st.success("Your personalised learning path is ready!")
+
+        st.write("### Follow these topics in order:")
+        st.write("### Mark topics as completed:")
+
+        completed_count = 0
+
+        for number, topic in enumerate(recommended_topics, start=1):
+            if st.checkbox(
+                f"{number}. {topic}",
+                key=f"personalised_{saved_subject}_{saved_level}_{topic}"
+            ):
+                completed_count += 1
+
+        total_topics = len(recommended_topics)
+        progress = completed_count / total_topics
+
+        st.subheader("📊 Your Learning Progress")
+        st.progress(progress)
+
+        st.write(
+            f"{completed_count} out of {total_topics} topics completed ({progress:.0%})"
+        )
+
+        if completed_count == total_topics:
+            st.success("🎉 Congratulations! You completed your learning path!")
+
+        if saved_goal == "Build Strong Fundamentals":
+            st.info("Focus on understanding the basics before moving to difficult topics.")
+        elif saved_goal == "Improve Problem Solving":
+            st.info("Practise problems and apply each concept through exercises.")
+        else:
+            st.info("Explore advanced concepts and work on practical applications.")
 elif page == "Prerequisite Finder":
     st.title("🔍 Prerequisite Finder")
     st.write("Discover what you should learn before starting a new topic.")
