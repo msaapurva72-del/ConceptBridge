@@ -7,6 +7,81 @@ st.set_page_config(
     layout="wide"
 )
 
+
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root { --cb-purple:#6128ef; --cb-navy:#111746; --cb-ink:#10183f; }
+html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
+.stApp { background: linear-gradient(135deg,#f7f8ff 0%,#f2f4ff 48%,#fbfaff 100%); color:var(--cb-ink); }
+.block-container { padding-top:1.8rem; padding-bottom:2.5rem; max-width:1450px; }
+section[data-testid="stSidebar"] { background:linear-gradient(180deg,#111746 0%,#201b62 100%); border-right:1px solid #39337e; }
+section[data-testid="stSidebar"] * { color:#fff !important; }
+section[data-testid="stSidebar"] [data-testid="stRadio"] label {
+    padding: .55rem .75rem; border-radius:12px; margin:.12rem 0;
+    transition:background .2s ease, transform .2s ease;
+}
+section[data-testid="stSidebar"] [data-testid="stRadio"] label:hover {
+    background:#4530a9; transform:translateX(3px);
+}
+section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p { color:#e8e7ff !important; }
+h1,h2,h3 { color:#111746; letter-spacing:-.035em; }
+div[data-testid="stMetric"] {
+    background:linear-gradient(135deg,#fff,#f0edff); padding:1rem 1.1rem;
+    border:1px solid #e5e2ff; border-radius:18px; box-shadow:0 5px 18px #28205b0c;
+}
+div[data-testid="stButton"] button {
+    background:linear-gradient(110deg,#6429f2,#8747ff); color:white;
+    border:0; border-radius:13px; padding:.55rem 1.1rem; font-weight:700;
+    transition:transform .2s ease, box-shadow .2s ease;
+}
+div[data-testid="stButton"] button:hover { color:white; transform:translateY(-2px); box-shadow:0 8px 20px #6128ef40; }
+div[data-testid="stTextInput"] input, div[data-testid="stSelectbox"] div[data-baseweb="select"] {
+    border-radius:12px;
+}
+div[data-testid="stExpander"] { border:1px solid #e5e4fa; border-radius:14px; background:#ffffffc9; }
+div[data-testid="stProgress"] > div { border-radius:20px; }
+.cb-hero {
+    background:linear-gradient(112deg,#ffffff 0%,#eeebff 56%,#dfd6ff 100%);
+    border:1px solid #e2ddff; border-radius:26px; padding:2.2rem 2rem;
+    box-shadow:0 12px 35px #25205b12; position:relative; overflow:hidden;
+    animation:cbFade .65s ease both;
+}
+.cb-hero h1 { font-size:clamp(2.2rem,4vw,3.5rem); line-height:1.08; margin:.3rem 0 .8rem; }
+.cb-gradient { background:linear-gradient(90deg,#5420e8,#9a45ff); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.cb-hero p { font-size:1.05rem; max-width:650px; color:#222b59; }
+.cb-hero-art { font-size:5.4rem; text-align:center; filter:drop-shadow(0 8px 10px #4430a533); }
+.cb-feature {
+    border-radius:19px; padding:1.25rem .9rem; min-height:130px; text-align:center;
+    border:1px solid #ffffff; box-shadow:0 7px 18px #20205012;
+    transition:transform .22s ease, box-shadow .22s ease;
+}
+.cb-feature:hover,.cb-subject:hover { transform:translateY(-5px); box-shadow:0 12px 25px #30206b20; }
+.cb-feature .symbol { font-size:2.2rem; margin-bottom:.35rem; }
+.cb-subject {
+    border-radius:17px; padding:1rem .9rem; min-height:100px; display:flex;
+    align-items:center; gap:.8rem; border:1px solid #ffffff;
+    box-shadow:0 5px 15px #24205b12; transition:transform .22s ease,box-shadow .22s ease;
+    margin-bottom:.8rem; color:#111746;
+}
+.cb-subject .symbol { font-size:2rem; min-width:42px; text-align:center; }
+.cb-subject .subject-name { font-weight:750; font-size:.98rem; line-height:1.25; }
+.cb-subject .subject-count { font-size:.78rem; opacity:.75; margin-top:.25rem; }
+.cb-section-note { color:#515b86; margin-top:-.35rem; margin-bottom:1.2rem; }
+@keyframes cbFade { from {opacity:0;transform:translateY(9px)} to {opacity:1;transform:translateY(0)} }
+@media (prefers-reduced-motion: reduce) { * { animation:none !important; transition:none !important; } }
+</style>
+""", unsafe_allow_html=True)
+
+st.sidebar.markdown(
+    "<div style='text-align:center;padding:8px 0 18px;'>"
+    "<div style='font-size:48px;'>📘</div>"
+    "<div style='font-size:22px;font-weight:800;'>Concept Bridge</div>"
+    "<div style='font-size:12px;opacity:.85;'>Learn · Connect · Grow</div></div>",
+    unsafe_allow_html=True
+)
+
 st.sidebar.title("🌉 Concept Bridge")
 st.sidebar.caption("Connect What You Know. Discover What You Need.")
 
@@ -25,141 +100,122 @@ page = st.sidebar.radio(
 )
 
 if page == "Dashboard":
-    st.title("🌉 Welcome to Concept Bridge")
-    st.write("Your personalised learning space.")
-
-    name = st.text_input("Enter your name")
-
+    st.markdown(
+        """
+        <div class="cb-hero">
+          <div style="display:grid;grid-template-columns:1.45fr .8fr;align-items:center;gap:1rem;">
+            <div>
+              <div style="font-weight:700;color:#6840df;">YOUR LEARNING COMPANION</div>
+              <h1>Welcome to<br><span class="cb-gradient">Concept Bridge!</span></h1>
+              <p>Explore concepts, discover connections and build knowledge across subjects — all in one learning space.</p>
+            </div>
+            <div class="cb-hero-art">⚛️ 🎓<br>🌉📖💡</div>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    name = st.text_input("What should we call you?", placeholder="Enter your name")
     if name:
         st.success(f"Welcome, {name}!")
 
-    st.subheader("Your Learning Overview")
-
-    col1, col2, col3 = st.columns(3)
-
-    col1.metric("Subjects", "6")
-    col2.metric("Topics", "12")
-    col3.metric("Completed", "0")
-
     st.subheader("Explore Your Learning")
-    st.write("Discover concepts, connect subjects and identify knowledge gaps.")
-
+    st.markdown('<div class="cb-section-note">Choose a space to continue your learning journey.</div>', unsafe_allow_html=True)
+    features = [
+        ("📘", "Explore Subjects", "linear-gradient(135deg,#dceaff,#c9ddff)"),
+        ("🕸️", "Find Connections", "linear-gradient(135deg,#ddf8e8,#c8f0d8)"),
+        ("✅", "Test Your Knowledge", "linear-gradient(135deg,#fff0d8,#ffe0b8)"),
+        ("📈", "Track Your Progress", "linear-gradient(135deg,#eee0ff,#dfcaff)")
+    ]
+    cols = st.columns(4)
+    for col, (symbol, label, background) in zip(cols, features):
+        with col:
+            st.markdown(
+                f'<div class="cb-feature" style="background:{background};">'
+                f'<div class="symbol">{symbol}</div><b>{label}</b></div>',
+                unsafe_allow_html=True
+            )
+    st.markdown("")
+    st.info("“Bridge the gap between concepts and confidence.”")
 
 elif page == "Subject Library":
     st.title("📚 Subject Library")
-    st.write("Explore subjects, discover topics and expand your knowledge.")
+    st.markdown('<div class="cb-section-note">Explore subjects, discover topics and expand your knowledge.</div>', unsafe_allow_html=True)
 
     subjects = {
-        "Mathematics": [
-            "Algebra", "Calculus", "Probability",
-            "Statistics", "Trigonometry", "Linear Algebra",
-            "Differential Equations", "Discrete Mathematics"
-        ],
-        "Computer Science": [
-            "C Programming", "Python", "Java", "C++",
-            "Data Structures", "Algorithms", "Operating Systems",
-            "Computer Networks", "Database Management",
-            "Web Development"
-        ],
-        "Physics": [
-            "Mechanics", "Electricity", "Magnetism",
-            "Optics", "Thermodynamics", "Waves"
-        ],
-        "Chemistry": [
-            "Atomic Structure", "Chemical Bonding",
-            "Organic Chemistry", "Inorganic Chemistry",
-            "Chemical Reactions", "Thermodynamics"
-        ],
-        "Artificial Intelligence": [
-            "Introduction to AI", "Machine Learning",
-            "Deep Learning", "Neural Networks",
-            "Natural Language Processing",
-            "Computer Vision", "Generative AI"
-        ],
-        "Biology": [
-            "Cell Biology", "Genetics", "Human Anatomy",
-            "Ecology", "Microbiology", "Evolution"
-        ],
-        "Electrical Engineering": [
-            "Circuit Theory", "Electrical Machines",
-            "Power Systems", "Control Systems"
-        ],
-        "Electronics": [
-            "Digital Electronics", "Analog Electronics",
-            "Semiconductor Devices", "Microprocessors"
-        ],
-        "Mechanical Engineering": [
-            "Engineering Mechanics", "Thermodynamics",
-            "Fluid Mechanics", "Manufacturing"
-        ],
-        "Civil Engineering": [
-            "Structural Engineering", "Surveying",
-            "Building Materials", "Geotechnical Engineering"
-        ],
-        "English": [
-            "Grammar", "Vocabulary", "Communication Skills",
-            "Reading Comprehension", "Creative Writing"
-        ],
-        "Environmental Science": [
-            "Ecosystems", "Climate Change",
-            "Pollution", "Natural Resources"
-        ],
-        "Economics": [
-            "Microeconomics", "Macroeconomics",
-            "Demand and Supply", "Markets"
-        ],
-        "Psychology": [
-            "Human Behaviour", "Memory",
-            "Learning", "Cognitive Psychology"
-        ]
+        "Mathematics": ["Algebra", "Calculus", "Probability", "Statistics", "Trigonometry", "Linear Algebra", "Differential Equations", "Discrete Mathematics"],
+        "Computer Science": ["C Programming", "Python", "Java", "C++", "Data Structures", "Algorithms", "Operating Systems", "Computer Networks", "Database Management", "Web Development"],
+        "Physics": ["Mechanics", "Electricity", "Magnetism", "Optics", "Thermodynamics", "Waves"],
+        "Chemistry": ["Atomic Structure", "Chemical Bonding", "Organic Chemistry", "Inorganic Chemistry", "Chemical Reactions", "Thermodynamics"],
+        "Artificial Intelligence": ["Introduction to AI", "Machine Learning", "Deep Learning", "Neural Networks", "Natural Language Processing", "Computer Vision", "Generative AI"],
+        "Biology": ["Cell Biology", "Genetics", "Human Anatomy", "Ecology", "Microbiology", "Evolution"],
+        "Electrical Engineering": ["Circuit Theory", "Electrical Machines", "Power Systems", "Control Systems"],
+        "Electronics": ["Digital Electronics", "Analog Electronics", "Semiconductor Devices", "Microprocessors"],
+        "Mechanical Engineering": ["Engineering Mechanics", "Thermodynamics", "Fluid Mechanics", "Manufacturing"],
+        "Civil Engineering": ["Structural Engineering", "Surveying", "Building Materials", "Geotechnical Engineering"],
+        "English": ["Grammar", "Vocabulary", "Communication Skills", "Reading Comprehension", "Creative Writing"],
+        "Environmental Science": ["Ecosystems", "Climate Change", "Pollution", "Natural Resources"],
+        "Economics": ["Microeconomics", "Macroeconomics", "Demand and Supply", "Markets"],
+        "Psychology": ["Human Behaviour", "Memory", "Learning", "Cognitive Psychology"]
+    }
+
+    subject_styles = {
+        "Mathematics": ("🧮", "#e5efff"),
+        "Computer Science": ("</>", "#eee5ff"),
+        "Physics": ("⚛️", "#e3f8e9"),
+        "Chemistry": ("⚗️", "#ffe5f2"),
+        "Artificial Intelligence": ("🤖", "#dff4ff"),
+        "Biology": ("🌿", "#e8f8df"),
+        "Electrical Engineering": ("⚡", "#fff0dc"),
+        "Electronics": ("🔌", "#eee8ff"),
+        "Mechanical Engineering": ("⚙️", "#e3f0ff"),
+        "Civil Engineering": ("🏗️", "#e7f8e9"),
+        "English": ("📖", "#ffe6f2"),
+        "Environmental Science": ("🌍", "#dff7f4"),
+        "Economics": ("📊", "#e4efff"),
+        "Psychology": ("🧠", "#f0e4ff")
     }
 
     search = st.text_input(
         "🔍 Search for a subject or topic",
         placeholder="Example: Python, Algebra, Machine Learning..."
     )
-
-    found = 0
-
+    matching_subjects = []
     for subject, topics in subjects.items():
-        matching_topics = [
-            topic for topic in topics
-            if search.lower() in topic.lower()
-        ]
+        matching_topics = [topic for topic in topics if search.lower() in topic.lower()]
+        if not search or search.lower() in subject.lower() or matching_topics:
+            matching_subjects.append((subject, topics, matching_topics))
 
-        subject_matches = search.lower() in subject.lower()
+    if search and not matching_subjects:
+        st.warning("No matching subject or topic found. Try another word.")
 
-        if not search or subject_matches or matching_topics:
-            with st.expander(f"📘 {subject}"):
-                if search and subject_matches:
-                    for topic in topics:
-                        st.write("•", topic)
-                        found += 1
-                else:
-                    for topic in matching_topics:
-                        st.write("•", topic)
-                        found += 1
+    columns = st.columns(3)
+    for index, (subject, topics, matching_topics) in enumerate(matching_subjects):
+        symbol, colour = subject_styles[subject]
+        with columns[index % 3]:
+            st.markdown(
+                f'<div class="cb-subject" style="background:linear-gradient(120deg,{colour},#ffffff);">'
+                f'<div class="symbol">{symbol}</div><div><div class="subject-name">{subject}</div>'
+                f'<div class="subject-count">{len(topics)} learning topics</div></div></div>',
+                unsafe_allow_html=True
+            )
+            with st.expander(f"Explore {subject}  →"):
+                visible_topics = topics if (not search or search.lower() in subject.lower()) else matching_topics
+                st.markdown("**Topics to explore**")
+                for topic in visible_topics:
+                    st.write(f"• {topic}")
+
                 st.divider()
                 st.subheader(f"🎥 {subject} YouTube Learning Resources")
                 st.write(f"Explore video tutorials for {subject}.")
-
                 subject_query = subject.replace(" ", "+")
-
                 video_resources = {
-                    "Beginner Tutorials":
-                        f"https://www.youtube.com/results?search_query={subject_query}+for+beginners",
-
-                    "Complete Course":
-                        f"https://www.youtube.com/results?search_query={subject_query}+complete+course",
-
-                    "Topic-wise Lessons":
-                        f"https://www.youtube.com/results?search_query={subject_query}+topic+wise+tutorials"
+                    "Beginner Tutorials": f"https://www.youtube.com/results?search_query={subject_query}+for+beginners",
+                    "Complete Course": f"https://www.youtube.com/results?search_query={subject_query}+complete+course",
+                    "Topic-wise Lessons": f"https://www.youtube.com/results?search_query={subject_query}+topic+wise+tutorials"
                 }
-
                 for title, url in video_resources.items():
                     st.markdown(f"📺 [{title}]({url})")
-    if search and found == 0:
-        st.warning("No matching subject or topic found. Try another search.")
 
 elif page == "Knowledge Check":
     st.title("🧠 Knowledge Check")
