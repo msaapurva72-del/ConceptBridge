@@ -139,7 +139,25 @@ elif page == "Subject Library":
                     for topic in matching_topics:
                         st.write("•", topic)
                         found += 1
+                st.divider()
+                st.subheader(f"🎥 {subject} YouTube Learning Resources")
+                st.write(f"Explore video tutorials for {subject}.")
 
+                subject_query = subject.replace(" ", "+")
+
+                video_resources = {
+                    "Beginner Tutorials":
+                        f"https://www.youtube.com/results?search_query={subject_query}+for+beginners",
+
+                    "Complete Course":
+                        f"https://www.youtube.com/results?search_query={subject_query}+complete+course",
+
+                    "Topic-wise Lessons":
+                        f"https://www.youtube.com/results?search_query={subject_query}+topic+wise+tutorials"
+                }
+
+                for title, url in video_resources.items():
+                    st.markdown(f"📺 [{title}]({url})")
     if search and found == 0:
         st.warning("No matching subject or topic found. Try another search.")
 
